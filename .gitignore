@@ -1,7 +1,10 @@
 # My files
 env.py
 *.csv
+<<<<<<< HEAD
 *.txt
+=======
+>>>>>>> e2ee2f75152b4456dadf569646b3450f87cf54dd
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
