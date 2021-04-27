@@ -2,6 +2,32 @@ import pandas as pd
 import numpy as np
 
 
+
+
+##########################################################################################
+
+# Wrangle Access Logs
+
+##########################################################################################
+
+def wrangle_logs():
+    df = pd.read_csv('curriculum_logs.csv')
+    df.drop(columns=['id','slack','deleted_at', 'created_at','updated_at'], inplace=True)
+    df.start_date = pd.to_datetime(df.start_date, format='%Y-%m-%d')
+    df.end_date = pd.to_datetime(df.end_date, format='%Y-%m-%d')
+    df['date'] = df['date']+ " " + df['time']
+    df.date = pd.to_datetime(df.date)
+    df = df.set_index(df.date).drop(columns=['Unnamed: 0', 'date', 'time'])
+    df.program_id.fillna(0, inplace=True)
+    df.program_id = df.program_id.astype(int)
+    prog_dummies = pd.get_dummies(df.program_id, drop_first=False)
+    prog_dummies.drop(columns=0, inplace=True)
+    prog_dummies.columns = ['php','java','ds','front']
+    df = pd.concat([df, prog_dummies], axis=1)
+    
+    return df
+
+
 ##########################################################################################
 
 # Zero's and NULLs
