@@ -1,1 +1,1 @@
-# anomaly-detection-exercises
+This repository has been created to hold all of my Codeup anomaly detection exercises.
